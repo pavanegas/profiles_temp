@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
+import { tokenConfig } from './auth';
 
 import { GET_PROFILES, DELETE_PROFILES, ADD_PROFILES } from './types';
 
 // Gets the profiles.
-export const getProfiles = () => dispatch => {
-    axios.get('/api/users/')
+export const getProfiles = () => (dispatch, getState) => {
+    axios.get('/api/users/', tokenConfig(getState))
     .then(res => {
         dispatch({
             type: GET_PROFILES,
@@ -16,8 +17,8 @@ export const getProfiles = () => dispatch => {
 
 //Deletes
 
-export const deleteProfiles = (id) => dispatch => {
-    axios.delete(`/api/users/${id}/`)
+export const deleteProfiles = id => (dispatch, getState) => {
+    axios.delete(`/api/users/${id}/`, tokenConfig(getState))
     .then(res => {
         dispatch(createMessage({ profileDeleted : "Profile deleted."}))
         dispatch({
@@ -28,8 +29,8 @@ export const deleteProfiles = (id) => dispatch => {
 }
 
 //Adds
-export const addProfiles = (profiles) => dispatch => {
-    axios.post("/api/users/", profiles)
+export const addProfiles = profiles => (dispatch, getState) => {
+    axios.post("/api/users/", profiles, tokenConfig(getState))
     .then(res => {
         dispatch(createMessage({ profileCreated : "Profile created."}))
         dispatch({

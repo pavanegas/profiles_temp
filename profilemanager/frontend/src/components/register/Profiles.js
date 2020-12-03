@@ -17,11 +17,10 @@ export class Profiles extends Component {
     render() {
         return (
             <Fragment>
-                <h2>Profiles</h2>
+                <h2>Addresses</h2>
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Street One</th>
                             <th>Street Two</th>
                             <th>City</th>
@@ -33,7 +32,6 @@ export class Profiles extends Component {
                     <tbody>
                         { this.props.profiles.map(profiles => (
                             <tr key={profiles.id}>
-                                <td>{profiles.id}</td>
                                 <td>{profiles.streetOne}</td>
                                 <td>{profiles.streetTwo}</td>
                                 <td>{profiles.city}</td>
